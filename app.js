@@ -45,10 +45,9 @@ function parseMarkdownWithFrontmatter(markdownText) {
 
 async function loadData() {
     console.log('Iniciando carga de datos...');
-    const baseUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
     
     const fetches = dataFiles.map(file => 
-        fetch(`${baseUrl}data/${file}`)
+        fetch(`data/${file}`)
             .then(res => {
                 if (!res.ok) throw new Error(`Error cargando ${file}: ${res.status} en ${res.url}`);
                 return res.text();
