@@ -160,11 +160,43 @@ function renderTimeline(data) {
                 </div>
             `;
         }
+        
+        // Add click event for centering and highlighting
+        div.addEventListener('click', (e) => {
+            // Only scroll if we didn't click a link inside the card
+            if (e.target.tagName !== 'A') {
+                scrollAndHighlight(div);
+            }
+        });
+
         container.appendChild(div);
     });
 
     setupScrollAnimations();
     drawCumulative();
+}
+
+function scrollAndHighlight(element) {
+    if (!element) return;
+    
+    // Remove highlight from all cards
+    document.querySelectorAll('.timeline-item, .historical-item').forEach(card => card.classList.remove('highlighted-card'));
+    
+    // Add highlight to the matched card
+    element.classList.add('highlighted-card');
+    
+    // Calculate vertical scroll equivalent for horizontal position
+    // We want to center the card. targetX is the left position.
+    const cardWidth = element.offsetWidth;
+    const targetX = element.offsetLeft;
+    const scrollTarget = window.innerHeight + targetX - (window.innerWidth / 2) + (cardWidth / 2);
+    
+    window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+
+    // Auto-remove highlight after a few seconds
+    setTimeout(() => {
+        element.classList.remove('highlighted-card');
+    }, 3000);
 }
 
 function setupScrollAnimations() {
@@ -454,25 +486,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
             const itemId = allData[firstMatchIndex].id;
             const domElement = document.getElementById(itemId);
             if (domElement) {
-                // Remove highlight from all cards
-                document.querySelectorAll('.timeline-item, .historical-item').forEach(card => card.classList.remove('highlighted-card'));
-                
-                // Add highlight to the matched card
-                domElement.classList.add('highlighted-card');
-                
-                // Calculate vertical scroll equivalent for horizontal position
-                // We want to center the card. targetX is the left position.
-                // Center offset = (window.innerWidth - cardWidth) / 2
-                const cardWidth = domElement.offsetWidth;
-                const targetX = domElement.offsetLeft;
-                const scrollTarget = window.innerHeight + targetX - (window.innerWidth / 2) + (cardWidth / 2);
-                
-                window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-
-                // Auto-remove highlight after a few seconds
-                setTimeout(() => {
-                    domElement.classList.remove('highlighted-card');
-                }, 3000);
+                scrollAndHighlight(domElement);
             }
         }
     });
