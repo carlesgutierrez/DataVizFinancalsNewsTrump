@@ -2,6 +2,21 @@
 
 ![Timeline Preview](images/preview.png)
 
+## 🚀 Visualización en Vivo
+Puedes navegar el proyecto en: 
+**[https://carlesgutierrez.github.io/DataVizFinancalsNewsTrump/](https://carlesgutierrez.github.io/DataVizFinancalsNewsTrump/)**
+
+## 🖼️ Integración en IFRAME
+Para integrar esta visualización en otro sitio web o artículo periodístico a pantalla completa, utiliza el siguiente código:
+
+```html
+<iframe 
+  src="https://carlesgutierrez.github.io/DataVizFinancalsNewsTrump/" 
+  style="width:100%; height:100vh; border:none;" 
+  title="Trump Wealth Timeline">
+</iframe>
+```
+
 ## 📖 Sobre el Proyecto
 
 Este proyecto nace única y exclusivamente de la curiosidad por los datos. Pretende visibilizar y ordenar de manera visual lo que ha sucedido financieramente a lo largo de décadas, basándose estrictamente en noticias, artículos y datos públicos. 
