@@ -17,6 +17,30 @@ Para integrar esta visualización en otro sitio web o artículo periodístico a 
 </iframe>
 ```
 
+## 🚀 Desarrollo Local
+Para ejecutar el proyecto en tu máquina y disfrutar de **Hot Module Replacement (HMR)**:
+
+1. **Instalar dependencias**: (solo la primera vez)
+   ```bash
+   npm install
+   ```
+2. **Arrancar el servidor de desarrollo**:
+   ```bash
+   npm run dev
+   ```
+3. **Acceder a la web**:
+   Abre la URL que aparecerá en tu terminal (normalmente `http://localhost:5173`).
+
+---
+
+## 📦 Construcción para Producción
+Vite optimiza todo el código y genera una versión lista para ser servida:
+
+```bash
+npm run build
+```
+Esto genera la carpeta `dist/`, la cual GitHub despliega automáticamente gracias a la Acción configurada.
+
 ## 📖 Sobre el Proyecto
 
 Este proyecto nace única y exclusivamente de la curiosidad por los datos. Pretende visibilizar y ordenar de manera visual lo que ha sucedido financieramente a lo largo de décadas, basándose estrictamente en noticias, artículos y datos públicos. 
