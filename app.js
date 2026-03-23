@@ -366,7 +366,8 @@ function drawCumulative() {
         // Bottom axis date text
         const dateD = new Date(dateStr);
         const formatter = new Intl.DateTimeFormat('es', { month: 'short', year: 'numeric' });
-        const labelStr = dateStr ? formatter.format(dateD).toUpperCase() : '';
+        // Check if date is valid to avoid RangeError
+        const labelStr = (dateStr && !isNaN(dateD.getTime())) ? formatter.format(dateD).toUpperCase() : '';
         
         const axisText = document.createElementNS("http://www.w3.org/2000/svg", "text");
         axisText.setAttribute("x", x);
