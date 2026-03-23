@@ -44,23 +44,53 @@ function parseMarkdownWithFrontmatter(markdownText) {
 }
 
 async function loadData() {
-    const fetches = dataFiles.map(file => fetch(`data/${file}`).then(res => res.text()));
+    console.log('Iniciando carga de datos...');
+    const fetches = dataFiles.map(file => 
+        fetch(`data/${file}`)
+            .then(res => {
+                if (!res.ok) throw new Error(`Error cargando ${file}: ${res.status}`);
+                return res.text();
+            })
+            .catch(err => {
+                console.error(err);
+                return null;
+            })
+    );
+    
     const texts = await Promise.all(fetches);
     
-    allData = texts.map((text, index) => {
-        const parsed = parseMarkdownWithFrontmatter(text);
-        return {
-            id: `item-${index}`,
-            ...parsed.data,
-            htmlContent: marked.parse(parsed.content)
-        };
+    allData = texts
+        .filter(text => text !== null)
+        .map((text, index) => {
+            try {
+                const parsed = parseMarkdownWithFrontmatter(text);
+                return {
+                    id: `item-${index}`,
+                    ...parsed.data,
+                    htmlContent: marked.parse(parsed.content || '')
+                };
+            } catch (e) {
+                console.error("Error parseando archivo:", e);
+                return null;
+            }
+        })
+        .filter(d => d !== null && d.date);
+    
+    // Sort and ensure valid dates
+    allData.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB;
     });
     
-    allData.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
+    console.log(`Datos cargados: ${allData.length} eventos.`);
     renderTimeline(allData);
-    document.querySelector('.loading').style.opacity = '0';
-    setTimeout(() => document.querySelector('.loading').remove(), 500);
+    
+    const loadingEl = document.querySelector('.loading');
+    if (loadingEl) {
+        loadingEl.style.opacity = '0';
+        setTimeout(() => loadingEl.remove(), 500);
+    }
 }
 
 function renderTimeline(data) {
