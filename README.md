@@ -1,5 +1,7 @@
 # From "Zero" to Hero: The Donald Trump Wealth Timeline
 
+![Timeline Preview](images/preview.png)
+
 ## 📖 Sobre el Proyecto
 
 Este proyecto nace única y exclusivamente de la curiosidad por los datos. Pretende visibilizar y ordenar de manera visual lo que ha sucedido financieramente a lo largo de décadas, basándose estrictamente en noticias, artículos y datos públicos. 
