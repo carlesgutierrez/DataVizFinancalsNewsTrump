@@ -190,25 +190,24 @@ function scrollAndHighlight(element) {
     const clientWidth = document.documentElement.clientWidth;
     const totalHorizontalTravel = scrollWidth - clientWidth;
     
-    // Position of card relative to container start
-    const cardRect = element.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    const currentX = cardRect.left - containerRect.left;
+    // Position of card relative to the container using offsetLeft for accuracy
     const cardWidth = element.offsetWidth;
+    const targetX = element.offsetLeft;
     
-    // We want this X to be at the center of the viewport (clientWidth/2)
-    // The horizontal shift 'x' in GSAP is what we control via vertical scroll.
-    // target_shift = currentX - (clientWidth / 2) + (cardWidth / 2)
-    let targetShift = currentX - (clientWidth / 2) + (cardWidth / 2);
+    // The amount we want the container to have shifted horizontally (GSAP 'x')
+    // Shift = targetX - (clientWidth / 2) + (cardWidth / 2)
+    // We want this value to be negative in GSAP x: -Shift
+    let targetShift = targetX - (clientWidth / 2) + (cardWidth / 2);
     
     // Clamp targetShift
     targetShift = Math.max(0, Math.min(targetShift, totalHorizontalTravel));
     
-    // Since ScrollTrigger 'end' is window.innerHeight + scrollWidth
-    // And it travels 'totalHorizontalTravel' over 'scrollWidth' vertical pixels
-    // Vertical scroll = innerHeight + (targetShift * scrollWidth / totalHorizontalTravel)
-    // Actually, Scrub usually maps 1:1 if 'end' is '+=' + scrollWidth.
-    const scrollTarget = window.innerHeight + targetShift;
+    // The vertical scroll duration is container.scrollWidth (from setupScrollAnimations end: "+=" + scrollWidth)
+    // Vertical distance = targetShift * (VerticalDuration / totalHorizontalTravel)
+    const verticalDuration = scrollWidth;
+    const scrollOffset = targetShift * (verticalDuration / totalHorizontalTravel);
+    
+    const scrollTarget = window.innerHeight + scrollOffset;
     
     window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
 
