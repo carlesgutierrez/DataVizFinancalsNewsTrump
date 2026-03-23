@@ -144,7 +144,10 @@ function renderTimeline(data) {
             div.setAttribute('data-value', item.value || 0);
             
             let badgeHTML = item.is_conflict_of_interest ? `<div class="item-conflict-badge" title="Posible Conflicto de Interés / Abuso de Poder">⚠️</div>` : '';
-            let valueStr = item.value_str;
+            let valueStr = item.value_str || '';
+            if (item.value > 0 && !valueStr.startsWith('+')) {
+                valueStr = '+' + valueStr;
+            }
             div.innerHTML = `
                 ${bgImageHTML}
                 <div class="card-content-wrapper">
