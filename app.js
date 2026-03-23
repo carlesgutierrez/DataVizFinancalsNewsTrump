@@ -382,7 +382,7 @@ function drawCumulative() {
         text.setAttribute("y", currentAccumulated < 0 ? y + 30 : y - 20);
         text.setAttribute("class", "cumulative-label" + (currentAccumulated < 0 ? " negative-label" : ""));
         text.setAttribute("text-anchor", "middle");
-        text.textContent = `${currentAccumulated < 0 ? '-' : ''}$${Math.abs(currentAccumulated / 1e9).toFixed(2)}B`;
+        text.textContent = (currentAccumulated < 0 ? "-" : "") + "$" + Math.abs(currentAccumulated / 1e9).toFixed(2) + "B";
         svg.appendChild(text);
 
         // Bottom axis amount text (secondary cumulative indicator)
@@ -392,7 +392,7 @@ function drawCumulative() {
         amountText.setAttribute("class", "axis-svg-amount");
         amountText.setAttribute("text-anchor", "middle");
         amountText.setAttribute("fill", inProsperity ? "#d4af37" : "#d43737");
-        amountText.textContent = `${currentAccumulated < 0 ? '-' : ''}$${Math.abs(currentAccumulated / 1e9).toFixed(2)}B`;
+        amountText.textContent = (currentAccumulated < 0 ? "-" : "") + "$" + Math.abs(currentAccumulated / 1e9).toFixed(2) + "B";
         svg.appendChild(amountText);
 
         // Bottom axis date text
