@@ -185,11 +185,30 @@ function scrollAndHighlight(element) {
     // Add highlight to the matched card
     element.classList.add('highlighted-card');
     
-    // Calculate vertical scroll equivalent for horizontal position
-    // We want to center the card. targetX is the left position.
+    const container = document.querySelector('.horizontal-container');
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = document.documentElement.clientWidth;
+    const totalHorizontalTravel = scrollWidth - clientWidth;
+    
+    // Position of card relative to container start
+    const cardRect = element.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const currentX = cardRect.left - containerRect.left;
     const cardWidth = element.offsetWidth;
-    const targetX = element.offsetLeft;
-    const scrollTarget = window.innerHeight + targetX - (window.innerWidth / 2) + (cardWidth / 2);
+    
+    // We want this X to be at the center of the viewport (clientWidth/2)
+    // The horizontal shift 'x' in GSAP is what we control via vertical scroll.
+    // target_shift = currentX - (clientWidth / 2) + (cardWidth / 2)
+    let targetShift = currentX - (clientWidth / 2) + (cardWidth / 2);
+    
+    // Clamp targetShift
+    targetShift = Math.max(0, Math.min(targetShift, totalHorizontalTravel));
+    
+    // Since ScrollTrigger 'end' is window.innerHeight + scrollWidth
+    // And it travels 'totalHorizontalTravel' over 'scrollWidth' vertical pixels
+    // Vertical scroll = innerHeight + (targetShift * scrollWidth / totalHorizontalTravel)
+    // Actually, Scrub usually maps 1:1 if 'end' is '+=' + scrollWidth.
+    const scrollTarget = window.innerHeight + targetShift;
     
     window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
 
