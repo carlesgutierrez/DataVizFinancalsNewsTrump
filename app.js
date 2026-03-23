@@ -454,11 +454,25 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
             const itemId = allData[firstMatchIndex].id;
             const domElement = document.getElementById(itemId);
             if (domElement) {
+                // Remove highlight from all cards
+                document.querySelectorAll('.timeline-item, .historical-item').forEach(card => card.classList.remove('highlighted-card'));
+                
+                // Add highlight to the matched card
+                domElement.classList.add('highlighted-card');
+                
                 // Calculate vertical scroll equivalent for horizontal position
-                // Hero height is window.innerHeight. ScrollTrigger pins for scrollWidth.
+                // We want to center the card. targetX is the left position.
+                // Center offset = (window.innerWidth - cardWidth) / 2
+                const cardWidth = domElement.offsetWidth;
                 const targetX = domElement.offsetLeft;
-                const scrollTarget = window.innerHeight + targetX - (window.innerWidth / 2) + 200;
+                const scrollTarget = window.innerHeight + targetX - (window.innerWidth / 2) + (cardWidth / 2);
+                
                 window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+
+                // Auto-remove highlight after a few seconds
+                setTimeout(() => {
+                    domElement.classList.remove('highlighted-card');
+                }, 3000);
             }
         }
     });
