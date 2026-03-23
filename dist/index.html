@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From "Zero" to Hero: The Donald Trump Wealth Timeline</title>
+    <!-- Google Fonts for elegant typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/DataVizFinancalsNewsTrump/assets/index-DrWntXk8.js"></script>
+  <link rel="stylesheet" crossorigin href="/DataVizFinancalsNewsTrump/assets/index-C4Wsx5D3.css">
+</head>
+<body>
+    <div class="loading">Cargando datos históricos...</div>
+
+    <!-- Moved filters outside of hero to be sticky at the top center -->
+    <div class="filters" id="sticky-filters">
+        <button class="filter-btn active" data-filter="all">Todas las Etapas</button>
+        <button class="filter-btn" data-filter="Bancarrota">Bancarrotas</button>
+        <button class="filter-btn" data-filter="Pérdidas">Pérdidas</button>
+        <button class="filter-btn" data-filter="Negocios">Negocios Formales</button>
+        <button class="filter-btn" data-filter="Crypto">Crypto y DeFi</button>
+        <button class="filter-btn" data-filter="Internacional">Acuerdos Int.</button>
+        <button class="filter-btn" data-filter="Élites">Élites / Favores</button>
+    </div>
+    
+    <header class="hero">
+        <svg class="hero-bg-svg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">TRIUMPH</text>
+        </svg>
+        <div class="hero-content">
+            <h1>From "Zero" to Hero</h1>
+            <p class="subtitle">Una cronología visual de las Pérdidas Históricas y el Enriquecimiento Presidencial (1985-2026)</p>
+            <div class="intro">
+                <p>Explora cómo se revirtió una década de quiebras en un imperio político-financiero global. Desliza hacia abajo para navegar por el tiempo horizontalmente.</p>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <div class="horizontal-scroll-wrapper">
+        <div class="horizontal-container" id="timeline-container">
+            <svg class="connection-line" id="connection-line"></svg>
+            <!-- Timeline items will be injected here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</body>
+</html>

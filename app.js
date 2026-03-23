@@ -46,8 +46,9 @@ function parseMarkdownWithFrontmatter(markdownText) {
 async function loadData() {
     console.log('Iniciando carga de datos...');
     
+    // In Vite, assets in public/ are served from the root
     const fetches = dataFiles.map(file => 
-        fetch(`data/${file}`)
+        fetch(`./data/${file}`)
             .then(res => {
                 if (!res.ok) throw new Error(`Error cargando ${file}: ${res.status} en ${res.url}`);
                 return res.text();

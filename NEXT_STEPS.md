@@ -10,7 +10,9 @@
 4. Todo está integrado en `app.js` y `style.css`, obteniendo los datos cronológicamente.
 
 ## Lo que está pendiente (Siguientes Pasos)
-1. Seguir modificando detalles estéticos al gusto del usuario.
+- [x] Migrar a Vite.js para solucionar problemas de rutas en GitHub Pages.
+- [ ] Automatizar despliegue con GitHub Actions (opcional).
+- [ ] Ampliar base de datos con eventos de 2026.
 
 ## Instrucciones para reanudar
 - Abre `npx serve .` y visualiza los cambios.
